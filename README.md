@@ -144,7 +144,7 @@ Select menu - note that acceptable select options are specified using the <code>
 
 <h3>Validation Messages</h3>
 
-Upon submission of the form(s), if one or more inputs are invalid a message for each invalid element is displayed. <code>Validate</code> connects input to it's validation error message through a data attribute. Set this data attribute to match the ID of the form input. As soon as the input becomes valid the message is hidden.
+Upon submission of the form(s), if one or more inputs are invalid an error message for each element that's invalid is displayed. <code>Validate</code> matches up each input to it's validation error message through a data attribute. Set this data attribute to match the ID of the form input its matched to. As soon as the input becomes valid the error message is hidden.
 ```html
 <input type="url" id="url" placeholder="URL" 
 	data-validate-length="5,40" 
