@@ -1,0 +1,25 @@
+.validate-msg {
+	color: red;
+	display: none;
+}
+form {
+	padding: 20px;
+	background: #EDEDED;
+	border-radius: 10px;
+	border: 2px solid #DDD;
+}
+#form1-val {
+	background: #fcfcfc;
+}
+.validated {
+	border: 1px solid #65ed7c;
+}
+.validation-indicator {
+	display: block;
+}
+#form1-val .form-group {
+	margin-bottom: 28px;
+}
+.last {
+	margin-bottom: 0 !important;
+}

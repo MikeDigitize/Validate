@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-sm-offset-2">
+				<h3>Sign Up</h3>
+				<form role="form" novalidate id="form1">
+					<div class="form-group">
+						<label for="name">First Name (Required)</label>
+						<input type="text" class="form-control" id="name" placeholder="Enter first name" 
+							data-validate-length="3,20" data-validate-type="name" data-validate-required="true">
+						<span class="help-block validate-msg" data-validate="name">Please enter a valid first name (3 to 20 characters)</span>
+					</div>
+					<div class="form-group">
+						<label for="surname">Surname (Required)</label>
+						<input type="text" class="form-control" id="surname" placeholder="Enter surname" 
+							data-validate-length="3,30" data-validate-type="name" data-validate-required="true">
+						<span class="help-block validate-msg" data-validate="surname">Please enter a valid surname (3 to 30 characters)</span>
+					</div>
+					<div class="form-group">
+						<label for="email">Email address</label>
+						<input type="email" class="form-control" id="email" placeholder="Enter email" 
+							data-validate-length="6,30" data-validate-type="email">
+						<span class="help-block validate-msg" data-validate="email">Please enter a valid email address (up to 20 characters)</span>
+					</div>
+					<div class="form-group">
+						<label for="pass">Password</label>
+						<input type="password" class="form-control" id="pass" placeholder="Password"
+							data-validate-length="5,20" data-validate-type="password">
+						<span class="help-block validate-msg" data-validate="pass">Please enter a valid password (up to 20 characters)</span>
+					</div>
+					<div class="form-group">
+						<label for="select">Age Range (Required)</label>
+						<select class="form-control" id="select" data-validate-required="true" data-validate-type="select">
+							<option>Choose an option</option>
+							<option data-validate-select="true">18-25</option>
+							<option data-validate-select="true">25-34</option>
+							<option data-validate-select="true">35-44</option>
+							<option data-validate-select="true">45-54</option>
+							<option data-validate-select="true">55+</option>
+						</select>
+						<span class="help-block validate-msg" data-validate="select">Please choose an age range</span>
+					</div>
+					<div class="form-group">
+						<label for="select">Account Type (Required)</label>
+						<select class="form-control" id="select1" data-validate-type="select">
+							<option>Choose an option</option>
+							<option>Not this one though...</option>
+							<option data-validate-select="true">Gold</option>
+							<option data-validate-select="true">Silver</option>
+							<option data-validate-select="true">Bronze</option>
+							<option data-validate-select="true">Free</option>
+						</select>
+						<span class="help-block validate-msg" data-validate="select1">Please choose an account</span>
+					</div>						
+					<div class="form-group">
+						<label for="url">Your website URL</label>
+						<input type="url" class="form-control" id="url" placeholder="URL"
+							data-validate-length="5,40" data-validate-type="url">
+						<span class="help-block validate-msg" data-validate="url">Please enter a valid website address</span>
+					</div>	
+					<div class="form-group">
+						<label for="textarea">Please enter a comment (Required)</label>
+						<textarea class="form-control" rows="3" data-validate-required="true" data-validate-length="5,400" data-validate-type="textarea" data-validate-remove-html="false" id="textarea"></textarea>
+						<span class="help-block validate-msg" data-validate="textarea">Please enter your comment</span>
+					</div>			
+					<div class="form-group">
+						<button type="submit" class="btn btn-default">Submit</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-4">
+				<h3>Validation</h3>
+				<form role="form" novalidate id="form1-val">
+					<div class="form-group">
+						<label for="name-val">First Name</label>
+						<span class="help-block validation-indicator" id="name-val">Validation for first name</span>
+					</div>
+					<div class="form-group">
+						<label for="surname-val">Surname</label>
+						<span class="help-block validation-indicator" id="surname-val">Validation for surname</span>
+					</div>
+					<div class="form-group">
+						<label for="email-val">Email</label>
+						<span class="help-block validation-indicator" id="email-val">Validation for email</span>
+					</div>
+					<div class="form-group">
+						<label for="pass-val">Password</label>
+						<span class="help-block validation-indicator" id="pass-val">Validation for password</span>
+					</div>
+					<div class="form-group">
+						<label for="select-val">Age Range</label>
+						<span class="help-block validation-indicator" id="select-val">Validation for age range</span>
+					</div>
+					<div class="form-group">
+						<label for="select1-val">Age Range</label>
+						<span class="help-block validation-indicator" id="select1-val">Validation for account type</span>
+					</div>				
+					<div class="form-group">
+						<label for="url-val">URL</label>
+						<span class="help-block validation-indicator" id="url-val">Validation for url</span>
+					</div>	
+					<div class="form-group">
+						<label for="textarea-val">Comments</label>
+						<span class="help-block validation-indicator" id="textarea-val">Validation for comments</span>
+					</div>				
+					<div class="form-group last">
+						<label for="submit-display">Valid Submit?</label>
+						<span class="help-block validation-indicator" id="submit-display">On valid submit</span>
+					</div>
+				</form>
+			</div>
+
+			
+	</div>
+	<script src="js/validate-0.5.min.js"></script>
+	<script>
+
+	(function() {
+
+		Validate().init({
+			removeHTMLTags : true,
+			testmode : true,
+			formSelector : "#form1",
+			onValid : val,
+			onInValid : inVal,
+			onSubmit : valSub
+		});		
+
+		function inVal() {
+			var input = document.querySelector("#" + this.id + "-val"); 
+			input.innerHTML = "Invalid " + this.getAttribute("data-validate-type");
+			input.style.color = "red";
+		}
+
+		function val() {
+			var input = document.querySelector("#" + this.id + "-val"); 
+			input.innerHTML = "Valid " + this.getAttribute("data-validate-type");
+			input.style.color = "#65ed7c";
+		}
+
+		function valSub() {
+			document.querySelector("#submit-display").innerHTML = "Submit OK!";
+		}
+
+	})();
+
+	
+	</script>
+</body>
+</html>
