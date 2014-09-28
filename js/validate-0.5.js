@@ -6,8 +6,8 @@ var Validate = (function() {
 	var regex = {
 		email : /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 		name : /^[a-zA-Z-\s]+$/,
-		password : /^[ A-Za-z0-9_@.<>\/#=&+*^;:\$£"!()%{}-]+$/,
-		textarea : /^[ A-Za-z0-9_@.<>\/#=&+*^;:\$£"!()%{}-]+$/,
+		password : /^[ A-Za-z0-9_@.<>\/#=&+*^;:\$£"!\?()%{}-]+$/,
+		textarea : /^[ A-Za-z0-9_@.<>\/#=&+*^;:\$£"\?!()%{}-]+$/,
 		url : /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/
 	};
 
@@ -22,7 +22,6 @@ var Validate = (function() {
 	var onInValidCallback;
 	var onValidSubmit;
 	var testmode;
-	var currentEvent;
 
 	function init(settings) {
 
@@ -42,7 +41,7 @@ var Validate = (function() {
 		// for each form specified give it a class, store it and find its inputs
 		for(var i = 0; i < forms.length; i++) {
 
-			addEventHandler.call(forms[i], "submit", onFormSubmit);
+			addEventHandler.call(forms[i], forms[i], "submit", onFormSubmit);
 
 			var className = "Validate" + i;
 			forms[i].className = forms[i].className === "" ? className : forms[i].className + " " + className;
@@ -103,20 +102,19 @@ var Validate = (function() {
 
 		var type = this.type === "select-one" ? "change" : "keyup";
 
-		addEventHandler.call(this, type, onChange);
-		addEventHandler.call(this, "blur", onChange);
+		addEventHandler.call(this, this, type, onChange);
+		addEventHandler.call(this, this, "blur", onChange);
 
 	}
 
 
-	function addEventHandler(evt, fn) {
+	function addEventHandler(el, evt, fn) {
 
-		var self = this;
 		var bind = function() {
-			return fn.apply(self, arguments);	
+			return fn.apply(el, arguments);	
 		}			
 
-		this.addEventListener ? this.addEventListener(evt, bind, false) : this.attachEvent("on" + evt, bind);
+		el.addEventListener ? el.addEventListener(evt, bind, false) : el.attachEvent("on" + evt, bind);
 
 	}
 
@@ -178,17 +176,16 @@ var Validate = (function() {
 	}
 
 	function onChange(evt) {
-
-		currentEvent = evt;		
+	
 		var value = this.type === "select" ? this[this.selectedIndex].value : this.value;
-		returnFormandInput.call(this).input.value = value;
-		validate.call(this);
+		returnInput.call(this).input.value = value;
+		validate.call(this, evt);
 
 	}
 
-	function validate() {
+	function validate(evt) {
 		
-		var input = returnFormandInput.call(this).input;
+		var input = returnInput.call(this).input;
 		var type = input.type;
 		var minlength = input.minlength;	
 		var maxlength = input.maxlength;
@@ -198,11 +195,11 @@ var Validate = (function() {
 			this[this.selectedIndex].getAttribute("data-validate-select") === "true" ? true : false :
 			regex[type].test(input.value) && length >= minlength && length <= maxlength ? true : false;
 			
-		input.valid ? isInputValid.call(this, true) : isInputValid.call(this, false);
+		input.valid ? isInputValid.call(this, evt, true) : isInputValid.call(this, evt, false);
 		
 	}
 
-	function isInputValid(valid) {
+	function isInputValid(evt, valid) {
 
 		if(valid){
 
@@ -211,28 +208,26 @@ var Validate = (function() {
 			}
 			
 			showHideMessage.call(this, "none");
-			onValidCallback.call(this, currentEvent);
+			onValidCallback.call(this, evt);
 
 		}
 		else {			
 
 			this.className = this.className.replace(" validated", "");
-			onInValidCallback.call(this, currentEvent);
+			onInValidCallback.call(this, evt);
 
 		}
 	}
 
-	function returnFormandInput() {
+	function returnInput() {
 
 		var classReg = /Validate\d+\-\d+/;
 		var indexReg = /\d+\-\d+/
 		var inputKey = this.className.match(classReg);
 		var indexes = inputKey[0].match(indexReg);
-
 		var formKey = "Validate" + indexes[0].split("-")[0];
 
 		return {
-			forms : state[formKey],
 			input : state[formKey].inputs[inputKey[0]]
 		}
 
@@ -250,8 +245,7 @@ var Validate = (function() {
 				onValidCallback : onValidCallback,
 				onValidSubmit : onValidSubmit,
 				state : state,
-				currentEvent : currentEvent,
-				returnFormandInput : returnFormandInput,
+				returnInput : returnInput,
 				showHideMessage : showHideMessage,
 				isInputValid : isInputValid,
 				isFormValid : isFormValid,

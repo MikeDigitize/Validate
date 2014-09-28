@@ -23,3 +23,13 @@ form {
 .last {
 	margin-bottom: 0 !important;
 }
+h1, p, a {
+	text-align: center;
+}
+a {
+	display: block;
+}
+p {
+	text-align: center;
+	font-style: italic;
+}
