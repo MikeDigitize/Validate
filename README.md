@@ -1,9 +1,11 @@
 Validate
 ========
 
-Dependency free, tiny, non-intrusive form validation plugin for IE8+
+<a href="http://mikedigitize.com/validate/">Demo</a>
 
-<code>Validate</code> is a tiny, unobtrusive plugin to validate form text based inputs (text, email, password, url and textareas) and select menus for one or multiple forms on a web page. Radio buttons and checkboxes by nature don't need validation so have been excluded.
+Dependency free, tiny, non-intrusive form validation plugin for IE8+.
+
+<code>Validate</code> is a tiny, unobtrusive plugin to validate form text based inputs (text, email, password, url and textareas) and select menus for one or multiple forms on a web page (radio buttons and checkboxes by nature don't really need validation).
 
 Just include it on the page above the closing body tag and start things off by calling the init method. If no object is passed in <code>Validate</code> will validate all text inputs / select menus as expected and allow the form to submit when each required input has been suitably completed.
 
