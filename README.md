@@ -14,8 +14,7 @@ Just include it on the page above the closing body tag and call its init method 
 <script>
 ```
 ```javascript
-	AOValidate().init({
-		testmode : true,	
+	AOValidate({
 		formSelector : "#form1", 
 		onValid : function(e) {	
 			console.log("Input is valid!!", this);
@@ -64,13 +63,6 @@ User specified function that fires after all required form inputs are validated.
 // `this` is mapped to the validated form. The event object is passed in too.
 // by default form.submit() is fired if not specified
 onSubmit : method 
-```
-<h3>Test Mode</h3>
-Expose all internal methods and properties for test purposes. 
-
-```javascript
-// set to false by default
-testmode : boolean 
 ```
 
 <code>Validate</code> will only show actual validation errors upon submit. Before that point the <code>Validated</code> class will be added to any validated input. Target this with CSS to display to the user a subtle indicator of validation. If you want anything further to happen you can specifiy it in the <code>onValid</code> callback (don't forget <code>this</code> is mapped to the input in the callback).
@@ -152,8 +144,3 @@ Upon submission of the form(s), if one or more inputs are invalid an error messa
 	data-validate-required="true">
 <span class="help-block" data-validate="url">Please enter a valid website address</span>
 ```
-
-<h3>Licence</h3>
-
-MIT License - use this in any way, shape or form you see fit. Extend it easily by adding extra regex for different input types such as numbers etc. Take a look at the demo file to see it in action.
-
