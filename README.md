@@ -11,25 +11,21 @@ Just include it on the page above the closing body tag and call its init method 
 
 ```html
 <script src="path-to-validate/validate.js"></script>
-<script>
 ```
 ```javascript
-	AOValidate({
-		formSelector : "#form1", 
-		onValid : function(e) {	
-			console.log("Input is valid!!", this);
-		},
-		onInValid : function(e) {	
-			console.log("Input is invalid!!", this);
-		},
-		onSubmit : function(e) {
-			console.log("Submit!!", this);
-			// ajax or just this.submit()
-		}
-	});
-```
-```html
-</script>
+AOValidate({
+	formSelector : "#form1", 
+	onValid : function(e) {	
+		console.log("Input is valid!!", this);
+	},
+	onInValid : function(e) {	
+		console.log("Input is invalid!!", this);
+	},
+	onSubmit : function(e) {
+		console.log("Submit!!", this);
+		// ajax or just this.submit()
+	}
+});
 ```
 
 The settings object takes five properties / methods - 
